@@ -10,6 +10,7 @@
             --card-bg: #1e293b;
             --card-active: #334155;
             --accent-color: #38bdf8;
+            --accent-hover: #0284c7;
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
             --active-glow: rgba(56, 189, 248, 0.4);
@@ -19,7 +20,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         body {
@@ -34,11 +35,14 @@
 
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            max-width: 1100px;
         }
 
         header h1 {
             font-size: 2.25rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
             background: linear-gradient(to right, #38bdf8, #818cf8);
             -webkit-background-clip: text;
@@ -47,6 +51,7 @@
 
         header p {
             color: var(--text-sub);
+            font-size: 1rem;
         }
 
         .controls-bar {
@@ -54,14 +59,20 @@
             padding: 1rem 1.5rem;
             border-radius: 12px;
             margin-bottom: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 1100px;
+            justify-content: center;
         }
 
         .stop-all-btn {
             background-color: #ef4444;
             color: white;
             border: none;
-            padding: 0.6rem 1.2rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
@@ -69,6 +80,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.95rem;
         }
 
         .stop-all-btn:hover {
@@ -78,7 +90,7 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 1.5rem;
             width: 100%;
             max-width: 1100px;
@@ -88,7 +100,7 @@
             background-color: var(--card-bg);
             border: 2px solid transparent;
             border-radius: 16px;
-            padding: 1.25rem;
+            padding: 1.25rem 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -124,7 +136,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-size: 2.2rem;
             transition: transform 0.2s ease;
         }
@@ -137,16 +149,25 @@
             font-size: 1rem;
             font-weight: 600;
             text-align: center;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             color: var(--text-main);
+            word-break: break-word;
+        }
+
+        .card-controls {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            align-items: center;
         }
 
         .loop-control {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 0.3rem 0.6rem;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 0.3rem 0.75rem;
             border-radius: 20px;
             font-size: 0.8rem;
             color: var(--text-sub);
@@ -156,6 +177,58 @@
         .loop-control input[type="checkbox"] {
             accent-color: var(--accent-color);
             cursor: pointer;
+            width: 14px;
+            height: 14px;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            width: 100%;
+            padding: 0 0.25rem;
+        }
+
+        .volume-icon {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            user-select: none;
+        }
+
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: #475569;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border: none;
+            border-radius: 50%;
+            background: var(--accent-color);
+            cursor: pointer;
+            transition: transform 0.1s ease;
         }
 
         .status-badge {
@@ -172,6 +245,96 @@
             background-color: #22c55e;
             box-shadow: 0 0 8px #22c55e;
         }
+
+        /* --- MEDIA QUERIES (RESPONSIVO) --- */
+
+        /* Tablets */
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 0.75rem;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            .sound-card {
+                padding: 1rem 0.75rem;
+            }
+
+            .icon-wrapper {
+                width: 58px;
+                height: 58px;
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .sound-title {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        /* Teléfonos Móviles */
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+
+            header {
+                margin-bottom: 1rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .controls-bar {
+                padding: 0.75rem 1rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .stop-all-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .sound-card {
+                padding: 0.85rem 0.5rem;
+                border-radius: 12px;
+            }
+
+            .icon-wrapper {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .sound-title {
+                font-size: 0.85rem;
+            }
+
+            .loop-control {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -183,14 +346,16 @@
 
     <div class="controls-bar">
         <button class="stop-all-btn" onclick="stopAllAudio()">
-            ⏹ Detener Todos los Sonidos
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="6" width="12" height="12" rx="2" />
+            </svg>
+            Detener Todos los Sonidos
         </button>
     </div>
 
     <div class="grid-container" id="soundGrid"></div>
 
     <script>
-        // Ruta base RAW conectada a tu repositorio
         const basePath = 'https://raw.githubusercontent.com/genius-3885/EfectosMusica/main/';
 
         const soundList = [
@@ -215,6 +380,7 @@
 
             soundList.forEach((item, index) => {
                 const audio = new Audio(item.file);
+                audio.volume = 1.0; // Volumen inicial (100%)
                 audioInstances[index] = audio;
 
                 const card = document.createElement('div');
@@ -224,12 +390,20 @@
                     <div class="status-badge"></div>
                     <div class="icon-wrapper">${item.icon}</div>
                     <div class="sound-title">${item.name}</div>
-                    <label class="loop-control" onclick="event.stopPropagation()">
-                        <input type="checkbox" id="loop-${index}">
-                        <span>Loop</span>
-                    </label>
+                    <div class="card-controls">
+                        <label class="loop-control" onclick="event.stopPropagation()">
+                            <input type="checkbox" id="loop-${index}">
+                            <span>Loop</span>
+                        </label>
+                        <div class="volume-control" onclick="event.stopPropagation()">
+                            <span class="volume-icon">🔈</span>
+                            <input type="range" class="volume-slider" id="volume-${index}" min="0" max="1" step="0.05" value="1">
+                            <span class="volume-icon">🔊</span>
+                        </div>
+                    </div>
                 `;
 
+                // Clic en la tarjeta (reproducir / pausar)
                 card.addEventListener('click', () => {
                     const checkbox = document.getElementById(`loop-${index}`);
                     audio.loop = checkbox.checked;
@@ -245,13 +419,21 @@
                     }
                 });
 
+                // Al finalizar la reproducción
                 audio.addEventListener('ended', () => {
                     card.classList.remove('playing');
                 });
 
+                // Cambio del Checkbox de Loop
                 const checkbox = card.querySelector(`#loop-${index}`);
                 checkbox.addEventListener('change', (e) => {
                     audio.loop = e.target.checked;
+                });
+
+                // Control individual de volumen
+                const volumeSlider = card.querySelector(`#volume-${index}`);
+                volumeSlider.addEventListener('input', (e) => {
+                    audio.volume = parseFloat(e.target.value);
                 });
 
                 grid.appendChild(card);
