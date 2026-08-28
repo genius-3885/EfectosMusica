@@ -177,7 +177,7 @@
 <body>
 
     <header>
-        <h1>Efectos de Sonido - Obra</h1>
+        <h1>Efectos de Sonido</h1>
         <p>Haz clic en cualquier tarjeta para reproducir o detener el audio</p>
     </header>
 
@@ -190,10 +190,9 @@
     <div class="grid-container" id="soundGrid"></div>
 
     <script>
-        // Ruta base local para tus archivos de audio
-        const basePath = 'C:/Users/Gmag/Music/AudiosObra/';
+        // Ruta base RAW conectada a tu repositorio
+        const basePath = 'https://raw.githubusercontent.com/genius-3885/EfectosMusica/main/';
 
-        // Lista de archivos con la ruta completa asignada
         const soundList = [
             { name: 'Aleteo', file: basePath + 'Aleteo.mp3', icon: '🕊️' },
             { name: 'Cierre Puerta', file: basePath + 'CierrePuerta.mp3', icon: '🚪' },
@@ -231,17 +230,13 @@
                     </label>
                 `;
 
-                // Control al hacer clic en la tarjeta
                 card.addEventListener('click', () => {
                     const checkbox = document.getElementById(`loop-${index}`);
                     audio.loop = checkbox.checked;
 
                     if (audio.paused) {
                         audio.currentTime = 0;
-                        audio.play().catch(e => {
-                            console.error('Error al reproducir audio:', e);
-                            alert('No se pudo cargar el audio. Verifica la ruta: ' + item.file);
-                        });
+                        audio.play().catch(e => console.error('Error al reproducir:', e));
                         card.classList.add('playing');
                     } else {
                         audio.pause();
@@ -250,12 +245,10 @@
                     }
                 });
 
-                // Al finalizar la reproducción
                 audio.addEventListener('ended', () => {
                     card.classList.remove('playing');
                 });
 
-                // Cambio de la opción Loop en ejecución
                 const checkbox = card.querySelector(`#loop-${index}`);
                 checkbox.addEventListener('change', (e) => {
                     audio.loop = e.target.checked;
